@@ -6,24 +6,22 @@ import java.util.UUID;
 /**
  * Representa um participante da comunidade TKS Forge.
  *
- * A entidade Participant deve conter apenas informações
- * inerentes à identidade do participante.
+ * <p>A entidade Participant deve conter apenas informações inerentes à identidade do participante.
  *
- * Informações calculadas como pontos, streaks, rankings e
- * conquistas não devem ser armazenadas aqui.
+ * <p>Informações calculadas como pontos, streaks, rankings e conquistas não devem ser armazenadas
+ * aqui.
  */
 public class Participant {
 
-    private UUID id;
+  private UUID id;
 
-    private String fullName;
+  private String fullName;
 
-    private String nickname;
+  private String nickname;
 
-    private LocalDate birthDate;
+  private LocalDate birthDate;
 
-    private LocalDateTime joinedAt;
+  private LocalDateTime joinedAt;
 
-    private ParticipantStatus status;
-
+  private ParticipantStatus status;
 }
