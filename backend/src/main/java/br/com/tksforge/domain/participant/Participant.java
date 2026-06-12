@@ -30,6 +30,8 @@ public class Participant {
   @Enumerated(EnumType.STRING)
   private ParticipantStatus status;
 
+  public Participant() {}
+
   public Participant(
       UUID id,
       String fullName,
