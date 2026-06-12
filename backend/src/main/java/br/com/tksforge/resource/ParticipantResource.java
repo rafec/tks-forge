@@ -1,15 +1,14 @@
 package br.com.tksforge.resource;
 
 import br.com.tksforge.domain.participant.Participant;
+import br.com.tksforge.repository.ParticipantRepository;
 import br.com.tksforge.resource.request.CreateParticipantRequest;
 import br.com.tksforge.service.ParticipantService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import java.util.List;
 
 @ApplicationScoped
 @Path("/participants")
@@ -18,10 +17,16 @@ import jakarta.ws.rs.core.MediaType;
 public class ParticipantResource {
 
   @Inject ParticipantService participantService;
+  @Inject ParticipantRepository participantRepository;
 
   @POST
   public Participant create(CreateParticipantRequest request) {
     return participantService.registerParticipant(
         request.fullName(), request.nickname(), request.birthDate());
+  }
+
+  @GET
+  public List<Participant> listParticipants() {
+    return participantRepository.listAll();
   }
 }
