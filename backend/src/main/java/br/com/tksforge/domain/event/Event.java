@@ -1,5 +1,6 @@
 package br.com.tksforge.domain.event;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
