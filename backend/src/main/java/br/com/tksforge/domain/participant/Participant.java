@@ -1,5 +1,9 @@
 package br.com.tksforge.domain.participant;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,6 +16,8 @@ import java.util.UUID;
  * <p>Informações calculadas como pontos, streaks, rankings e conquistas não devem ser armazenadas
  * aqui.
  */
+@Entity
+@Table(name = "participants")
 public class Participant {
 
   private UUID id;
@@ -24,5 +30,6 @@ public class Participant {
 
   private LocalDateTime joinedAt;
 
+  @Enumerated(EnumType.STRING)
   private ParticipantStatus status;
 }
