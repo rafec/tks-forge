@@ -30,6 +30,22 @@ public class Participant {
   @Enumerated(EnumType.STRING)
   private ParticipantStatus status;
 
+  public Participant(
+      UUID id,
+      String fullName,
+      String nickname,
+      LocalDate birthDate,
+      LocalDateTime joinedAt,
+      ParticipantStatus status) {
+
+    this.id = id;
+    this.fullName = fullName;
+    this.nickname = nickname;
+    this.birthDate = birthDate;
+    this.joinedAt = joinedAt;
+    this.status = status;
+  }
+
   public UUID getId() {
     return id;
   }
