@@ -1,7 +1,6 @@
 package br.com.tksforge.resource;
 
 import br.com.tksforge.domain.participant.Participant;
-import br.com.tksforge.repository.ParticipantRepository;
 import br.com.tksforge.resource.request.CreateParticipantRequest;
 import br.com.tksforge.service.ParticipantService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,7 +16,6 @@ import java.util.List;
 public class ParticipantResource {
 
   @Inject ParticipantService participantService;
-  @Inject ParticipantRepository participantRepository;
 
   @POST
   public Participant create(CreateParticipantRequest request) {
@@ -27,6 +25,6 @@ public class ParticipantResource {
 
   @GET
   public List<Participant> listParticipants() {
-    return participantRepository.listAll();
+    return participantService.listParticipants();
   }
 }

@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -30,5 +31,9 @@ public class ParticipantService {
     participantRepository.persist(participant);
 
     return participant;
+  }
+
+  public List<Participant> listParticipants() {
+    return participantRepository.listAll();
   }
 }

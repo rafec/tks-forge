@@ -1,7 +1,6 @@
 package br.com.tksforge.resource;
 
 import br.com.tksforge.domain.workout.Workout;
-import br.com.tksforge.repository.WorkoutRepository;
 import br.com.tksforge.resource.request.CreateWorkoutRequest;
 import br.com.tksforge.service.WorkoutService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,7 +16,6 @@ import java.util.List;
 public class WorkoutResource {
 
   @Inject WorkoutService workoutService;
-  @Inject WorkoutRepository workoutRepository;
 
   @POST
   public Workout create(CreateWorkoutRequest request) {
@@ -27,6 +25,6 @@ public class WorkoutResource {
 
   @GET
   public List<Workout> listWorkouts() {
-    return workoutRepository.listAll();
+    return workoutService.listWorkouts();
   }
 }

@@ -7,6 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -31,5 +32,9 @@ public class WorkoutService {
     workoutRepository.persist(workout);
 
     return workout;
+  }
+
+  public List<Workout> listWorkouts() {
+    return workoutRepository.listAll();
   }
 }
