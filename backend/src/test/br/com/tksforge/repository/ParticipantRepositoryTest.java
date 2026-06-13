@@ -6,7 +6,7 @@ import br.com.tksforge.domain.participant.Participant;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import java.util.UUID;
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
@@ -19,11 +19,7 @@ class ParticipantRepositoryTest {
   @Transactional
   void shouldPersistParticipant() {
 
-    Participant participant = new Participant();
-
-    participant.setId(UUID.randomUUID());
-    participant.setFullName("Rafael Brizuena");
-    participant.setNickname("Mestre Brizuena");
+    Participant participant = new Participant("Rafael Brizuena", "Bobera", LocalDate.of(2002, 8, 13));
 
     repository.persist(participant);
 

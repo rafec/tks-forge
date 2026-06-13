@@ -1,12 +1,10 @@
 package br.com.tksforge.service;
 
 import br.com.tksforge.domain.workout.Workout;
-import br.com.tksforge.domain.workout.WorkoutStatus;
 import br.com.tksforge.repository.WorkoutRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,17 +16,7 @@ public class WorkoutService {
   @Transactional
   public Workout registerWorkout(
       UUID participantId, String photoUrl, String note, String workoutType) {
-
-    Workout workout =
-        new Workout(
-            UUID.randomUUID(),
-            participantId,
-            LocalDate.now(),
-            photoUrl,
-            note,
-            workoutType,
-            WorkoutStatus.PENDING);
-
+    Workout workout = Workout.create(participantId, photoUrl, note, workoutType);
     workoutRepository.persist(workout);
 
     return workout;

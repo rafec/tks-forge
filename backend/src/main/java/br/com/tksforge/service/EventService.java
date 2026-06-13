@@ -6,7 +6,6 @@ import br.com.tksforge.repository.EventRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,8 +16,7 @@ public class EventService {
 
   @Transactional
   public Event registerEvent(UUID participantId, EventType type, String details) {
-    Event event = new Event(UUID.randomUUID(), participantId, LocalDateTime.now(), type, details);
-
+    Event event = Event.create(participantId, type, details);
     eventRepository.persist(event);
 
     return event;

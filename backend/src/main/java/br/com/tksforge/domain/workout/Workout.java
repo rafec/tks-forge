@@ -38,23 +38,36 @@ public class Workout {
 
   private LocalDateTime approvedAt;*/
 
-  public Workout() {}
+  protected Workout() {}
 
-  public Workout(
-      UUID id,
-      UUID participantId,
-      LocalDate workoutDate,
-      String photoUrl,
-      String note,
-      String workoutType,
-      WorkoutStatus workoutStatus) {
-    this.id = id;
+  public Workout(UUID participantId, String photoUrl, String note, String workoutType) {
     this.participantId = participantId;
-    this.workoutDate = workoutDate;
     this.photoUrl = photoUrl;
     this.note = note;
     this.workoutType = workoutType;
-    this.status = workoutStatus;
+  }
+
+  public static Workout create(
+      UUID participantId, String photoUrl, String note, String workoutType) {
+    Workout w = new Workout();
+    w.id = UUID.randomUUID();
+    w.workoutDate = LocalDate.now();
+    w.status = WorkoutStatus.PENDING;
+
+    return w;
+  }
+
+  @PrePersist
+  void prePersist() {
+    if (this.id == null) {
+      this.id = UUID.randomUUID();
+    }
+    if (this.workoutDate == null) {
+      this.workoutDate = LocalDate.now();
+    }
+    if (this.status == null) {
+      this.status = WorkoutStatus.PENDING;
+    }
   }
 
   public UUID getId() {

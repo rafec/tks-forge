@@ -30,22 +30,34 @@ public class Participant {
   @Enumerated(EnumType.STRING)
   private ParticipantStatus status;
 
-  public Participant() {}
+  protected Participant() {}
 
-  public Participant(
-      UUID id,
-      String fullName,
-      String nickname,
-      LocalDate birthDate,
-      LocalDateTime joinedAt,
-      ParticipantStatus status) {
-
-    this.id = id;
+  public Participant(String fullName, String nickname, LocalDate birthDate) {
     this.fullName = fullName;
     this.nickname = nickname;
     this.birthDate = birthDate;
-    this.joinedAt = joinedAt;
-    this.status = status;
+  }
+
+  public static Participant create(String fullName, String nickname, LocalDate birthDate) {
+    Participant p = new Participant(fullName, nickname, birthDate);
+    p.id = UUID.randomUUID();
+    p.joinedAt = LocalDateTime.now();
+    p.status = ParticipantStatus.ACTIVE;
+
+    return p;
+  }
+
+  @PrePersist
+  void prePersist() {
+    if (this.id == null) {
+      this.id = UUID.randomUUID();
+    }
+    if (this.joinedAt == null) {
+      this.joinedAt = LocalDateTime.now();
+    }
+    if (this.status == null) {
+      this.status = ParticipantStatus.ACTIVE;
+    }
   }
 
   public UUID getId() {

@@ -36,15 +36,30 @@ public class Event {
 
   private String details;
 
-  public Event() {}
+  protected Event() {}
 
-  public Event(
-      UUID id, UUID participantId, LocalDateTime occurredAt, EventType type, String details) {
-    this.id = id;
+  public Event(UUID participantId, EventType type, String details) {
     this.participantId = participantId;
     this.type = type;
-    this.occurredAt = occurredAt;
     this.details = details;
+  }
+
+  public static Event create(UUID participantId, EventType type, String details) {
+    Event e = new Event(participantId, type, details);
+    e.id = UUID.randomUUID();
+    e.occurredAt = LocalDateTime.now();
+
+    return e;
+  }
+
+  @PrePersist
+  void prePersist() {
+    if (this.id == null) {
+      this.id = UUID.randomUUID();
+    }
+    if (this.occurredAt == null) {
+      this.occurredAt = LocalDateTime.now();
+    }
   }
 
   public UUID getId() {
