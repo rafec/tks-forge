@@ -1,6 +1,8 @@
 package br.com.tksforge.domain.event;
 
 public enum EventType {
+  PARTICIPANT_JOINED,
+
   WORKOUT_REGISTERED,
 
   WORKOUT_APPROVED,
