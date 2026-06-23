@@ -47,16 +47,6 @@ public class Workout {
     this.workoutType = workoutType;
   }
 
-  public static Workout create(
-      UUID participantId, String photoUrl, String note, String workoutType) {
-    Workout w = new Workout();
-    w.id = UUID.randomUUID();
-    w.workoutDate = LocalDate.now();
-    w.status = WorkoutStatus.PENDING;
-
-    return w;
-  }
-
   @PrePersist
   void prePersist() {
     if (this.id == null) {
@@ -69,6 +59,34 @@ public class Workout {
       this.status = WorkoutStatus.PENDING;
     }
   }
+
+  public static Workout create(
+      UUID participantId, String photoUrl, String note, String workoutType) {
+    Workout w = new Workout(participantId, photoUrl, note, workoutType);
+    w.id = UUID.randomUUID();
+    w.workoutDate = LocalDate.now();
+    w.status = WorkoutStatus.PENDING;
+
+    return w;
+  }
+
+  public void approve() {
+    if (this.status != WorkoutStatus.PENDING) {
+      throw new IllegalArgumentException("Only pending workouts can be approved.");
+    }
+
+    this.status = WorkoutStatus.APPROVED;
+  }
+
+  public void reject() {
+    if (this.status != WorkoutStatus.PENDING) {
+      throw new IllegalArgumentException("Only pending workouts can be rejected.");
+    }
+
+    this.status = WorkoutStatus.REJECTED;
+  }
+
+  // ================ Getters and Setters ================
 
   public UUID getId() {
     return id;

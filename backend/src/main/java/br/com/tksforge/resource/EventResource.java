@@ -6,6 +6,7 @@ import br.com.tksforge.resource.response.EventResponse;
 import br.com.tksforge.service.EventService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -23,7 +24,7 @@ public class EventResource {
   @Inject EventService eventService;
 
   @POST
-  public Response create(CreateEventRequest request) {
+  public Response create(@Valid CreateEventRequest request) {
     Event event =
         eventService.registerEvent(request.participantId(), request.type(), request.details());
 
