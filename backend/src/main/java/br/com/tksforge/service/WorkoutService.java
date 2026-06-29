@@ -15,6 +15,7 @@ public class WorkoutService {
 
   @Inject WorkoutRepository workoutRepository;
   @Inject EventService eventService;
+  @Inject ParticipantStatsService participantStatsService;
 
   @Transactional
   public Workout registerWorkout(
@@ -47,6 +48,9 @@ public class WorkoutService {
 
     eventService.registerEvent(
         workout.getParticipantId(), EventType.POINT_GRANTED, "Point granted for approved workout.");
+
+    participantStatsService.grantPointForApprovedWorkout(
+        workout.getParticipantId(), workout.getWorkoutDate());
 
     return workout;
   }

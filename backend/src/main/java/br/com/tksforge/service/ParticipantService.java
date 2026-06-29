@@ -14,11 +14,14 @@ public class ParticipantService {
 
   @Inject ParticipantRepository participantRepository;
   @Inject EventService eventService;
+  @Inject ParticipantStatsService participantStatsService;
 
   @Transactional
   public Participant registerParticipant(String fullName, String nickname, LocalDate birthDate) {
     Participant participant = Participant.create(fullName, nickname, birthDate);
     participantRepository.persist(participant);
+
+    participantStatsService.registerInitialStats(participant.getId());
 
     eventService.registerEvent(
         participant.getId(), EventType.PARTICIPANT_JOINED, "Participante ingressou na comunidade");
